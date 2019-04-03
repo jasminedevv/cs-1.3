@@ -1,4 +1,4 @@
-#!python
+#!python3
 
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
@@ -8,6 +8,17 @@ import string
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
+
+class Base(dict):
+    """power : digit
+    Example: base2 (binary)
+    {0: 2^0
+    1: 2^1}
+    """
+    def __init__(self, base):
+        super().__init__()
+        # wait do I need this?
+        pass
 
 
 def decode(digits, base):
@@ -22,7 +33,8 @@ def decode(digits, base):
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
-    # ...
+
+    
 
 
 def encode(number, base):
@@ -39,7 +51,8 @@ def encode(number, base):
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
-    # ...
+    for i in range(base):
+        pass
 
 
 def convert(digits, base1, base2):

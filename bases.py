@@ -13,8 +13,7 @@ class Base(dict):
     """power : digit
     Example: base2 (binary)
     {0: 2^0
-    1: 2^1}
-    """
+    1: 2^1}"""
     def __init__(self, base):
         super().__init__()
         # wait do I need this?
@@ -33,6 +32,11 @@ def decode(digits, base):
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
+    total = 0
+    # for each digit going from the right (you'll need both index and item)
+    # multiply each digit by the base going from the right
+    # add each digit to the total
+    return total
 
     
 
@@ -51,8 +55,17 @@ def encode(number, base):
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
-    for i in range(base):
-        pass
+
+    # represent the letter as a list with all 0s to start?
+
+    # subtract the biggest starting from the left
+    # if the resulting number is >0 
+        # add the digit
+    # if the resulting number is <0
+        # add the 0 digit to the array
+        # try the next smallest one
+        # move on to the next digit
+    # if the resulting number is 0 stop
 
 
 def convert(digits, base1, base2):
@@ -71,7 +84,8 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
+    # decode from base2 to python number
+    # encode python number to base2
 
 
 def main():

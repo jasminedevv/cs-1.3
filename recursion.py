@@ -14,9 +14,8 @@ def factorial(n):
 
 def factorial_iterative(n):
     factorial = 1
-    for i in range(1, n+1):
-        print(factorial)
-        factorial *= i
+    for factor in range(1, n+1):
+        factorial *= factor
     return factorial
 
 

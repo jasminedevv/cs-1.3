@@ -93,6 +93,7 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from any base to any base (2 up to 36)
     # decode from base2 to python number
     # encode python number to base2
+    return None
 
 
 def main():

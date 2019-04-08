@@ -9,7 +9,7 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
-class Base(dict):
+class Base():
     """power : digit
     Example: base2 (binary)
     {0: 2^0
@@ -17,8 +17,15 @@ class Base(dict):
     def __init__(self, base):
         super().__init__()
         # wait do I need this?
-        pass
+        self.base = base
+        self.digits = ""
+        self.exponents = {}
 
+def decode_unary(num):
+    string = ""
+    for _ in range(num):
+        string = string + "."
+    return string
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.

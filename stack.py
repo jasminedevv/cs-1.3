@@ -1,4 +1,7 @@
 #!python
+# questions: 
+# 1. Is my super() init approach worse than what you had suggested? Why or why not?
+# 2. The default pop method on list returns an IndexError but the tests here want me to throw a ValueError. Does this matter and is one better than the other?
 
 from linkedlist import LinkedList
 

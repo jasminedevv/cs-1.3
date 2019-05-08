@@ -21,11 +21,22 @@ class Base():
         self.digits = ""
         self.exponents = {}
 
-def decode_unary(num):
+def decode_unary(num): # lol
     string = ""
     for _ in range(num):
         string = string + "."
     return string
+
+def parse_digit(char, base):
+    '''Returns an int of what number a char represents for the given base'''
+    if base == 16:
+        # use hexdigits
+        return string.hexdigits.index(char)
+    elif base >= 10:
+        return string.printable.index(char)
+    else:
+        return int(char)
+
 
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
@@ -34,18 +45,35 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
+    total = 0
+    power = 0
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
-    total = 0
-    # for each digit going from the right (you'll need both index and item)
+    
     # multiply each digit by the base going from the right
     # add each digit to the total
+    for char in digits[::-1]: # go through them in reverse
+        digit = parse_digit(char, base)
+        # put char to the power of base
+        
+        digit_value = digit*(base**power)
+        power += 1
+
+        # print("\npotential value",base**power,"\ndigit:", digit,"\nchar:", char, "\ntotal:", total, "\ndigit value:", digit_value)
+
+        total += digit_value
     return total
 
     
+def encode_digit(digit, base):
+    """Takes an int and returns a base representation of it"""
+    if base == 16:
+        # use hexdigits
+        return string.hexdigits[digit]
+    else:
+        return string.printable[digit]
 
 
 def encode(number, base):
@@ -57,22 +85,10 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    # ...
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
     # TODO: Encode number in any base (2 up to 36)
 
-    # represent the letter as a list with all 0s to start?
-
-    # subtract the biggest starting from the left
-    # if the resulting number is >0 
-        # add the digit
-    # if the resulting number is <0
-        # add the 0 digit to the array
-        # try the next smallest one
-        # move on to the next digit
-    # if the resulting number is 0 stop
+    # modulo the number by the base
+    
 
 
 def convert(digits, base1, base2):

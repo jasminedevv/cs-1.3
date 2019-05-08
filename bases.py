@@ -21,13 +21,15 @@ class Base():
         self.digits = ""
         self.exponents = {}
 
-def decode_unary(num): # lol
+
+def decode_unary(num): # for fun
     string = ""
     for _ in range(num):
         string = string + "."
     return string
 
-def parse_digit(char, base):
+
+def decode_digit(char, base):
     '''Returns an int of what number a char represents for the given base'''
     if base == 16:
         # use hexdigits
@@ -38,6 +40,15 @@ def parse_digit(char, base):
         return int(char)
 
 
+def encode_digit(digit, base):
+    """Takes an int and returns a base representation of it"""
+    if base == 16:
+        # special treatment for hexdigits
+        return string.hexdigits[digit]
+    else:
+        return string.printable[digit]
+        
+
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
@@ -47,33 +58,12 @@ def decode(digits, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     total = 0
     power = 0
-    # ...
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    
-    # multiply each digit by the base going from the right
-    # add each digit to the total
-    for char in digits[::-1]: # go through them in reverse
-        digit = parse_digit(char, base)
-        # put char to the power of base
-        
+    for character in digits[::-1]: # go through them in reverse
+        digit = decode_digit(character, base)
         digit_value = digit*(base**power)
         power += 1
-
-        # print("\npotential value",base**power,"\ndigit:", digit,"\nchar:", char, "\ntotal:", total, "\ndigit value:", digit_value)
-
         total += digit_value
     return total
-
-    
-def encode_digit(digit, base):
-    """Takes an int and returns a base representation of it"""
-    if base == 16:
-        # use hexdigits
-        return string.hexdigits[digit]
-    else:
-        return string.printable[digit]
 
 
 def encode(number, base):
@@ -85,10 +75,15 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in any base (2 up to 36)
-
-    # modulo the number by the base
     
+    digits = []
+    while number > 0:
+        remainder = number % base
+        number = number // base
+        digit = encode_digit(remainder, base)
+        digits.append(digit)
+    # return the reversed and stringified list
+    return "".join(digits[::-1]) 
 
 
 def convert(digits, base1, base2):
@@ -100,16 +95,8 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # decode from base2 to python number
-    # encode python number to base2
-    return None
+    decoded = decode(digits, base1)
+    return encode(decoded, base2)
 
 
 def main():

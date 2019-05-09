@@ -110,22 +110,24 @@ class ArrayStack(list):
         except IndexError:
             return None
 
-    # def pop(self):
-    #     """Remove and return the item on the top of this stack,
-    #     or raise ValueError if this stack is empty.
-    #     Running time: O(???) – Why? [TODO]"""
-    #     # TODO: Remove and return top item, if any
-    #     item = self[-1]
-
-    #     # weird stuff happening here
-    #     # Print statements suggest everything is working correctly but the tests are failing
-    #     # print("Popping: ", item)
-    #     # print("New top should be", self[-2])
-    #     # self = self[0:-1] # whoops this is broken
-    #     # print("new top is: ", self.peek())
-    #     item = self.peek()
-    #     self.remove(item)
-    #     return item
+    def pop(self):
+        """Remove and return the item on the top of this stack,
+        or raise ValueError if this stack is empty.
+        Running time: O(???) – Why? [TODO]"""
+        # TODO: Remove and return top item, if any
+        try:
+            item = self[-1]
+        except IndexError:
+            raise ValueError("Stack is empty")
+        # weird stuff happening here
+        # Print statements suggest everything is working correctly but the tests are failing
+        # print("Popping: ", item)
+        # print("New top should be", self[-2])
+        # self = self[0:-1] # whoops this is broken
+        # print("new top is: ", self.peek())
+        item = self.peek()
+        self.remove(item)
+        return item
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below

@@ -27,6 +27,11 @@ class Set(HashTable):
 
     def difference(self, other_set):
         difference = Set()
+        
+        for item in other_set.keys():
+            if not self.contains(item):
+                difference.add(item)
+
         for item in self.keys():
             if not other_set.contains(item):
                 difference.add(item)
@@ -40,7 +45,7 @@ class Set(HashTable):
         return intersection
 
     def is_subset(self, other_set):
-        """Check if set is a subset of another set"""
+        """Check if this set is a subset of another set"""
         for item in self.keys():
             if not other_set.contains(item):
                 return False

@@ -9,32 +9,35 @@ def contains(text, pattern):
     return find_index(text, pattern) is not None
 
 
-def find_index(text, pattern):
+def find_index(text, pattern, start_index=-1):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
-    if pattern == "":
-        return 0
-
-    next_char_index = 0
-    for text_index, char in enumerate(text):
-        next_char = pattern[next_char_index] 
-        print("loop stuff:", text_index, char)
-        
-        if char is not next_char:  
-            next_char_index = 0
-            next_char = pattern[next_char_index]
-
-        if char is next_char:
-            print("next char:", next_char)
-            next_char_index += 1
-            if next_char_index >= len(pattern):
-                print("next char index", next_char_index)
-                return text_index - (len(pattern) - 1)
     
-    return None
+
+    start_index += 1 # this is iffy
+
+    # ok so now we need to iterate through the text STARTING at the start index
+    for index in range(start_index, len(text)):
+        # is char (index, char) pattern[0]? also start at a certain point
+        if pattern == "":
+            return start_index
+
+        if text[index] in pattern[0]:
+            match_index = index # we match this against the corresponding char in the pattern
+            for pattern_char in pattern:
+                try:
+                    if pattern_char in text[match_index]:
+                        match_index += 1
+                    else:
+                        break # one of these didn't match
+                        # wait will this just break out of the for loop?
+                except IndexError:
+                    return None
+            else:
+                return index # this should work??
 
 
 def find_all_indexes(text, pattern):
@@ -48,17 +51,19 @@ def find_all_indexes(text, pattern):
 
 def generate_all_indexes(text, pattern):
     patterns = []
-    last_index = 0
-    while last_index <= (len(text) + len(pattern)):
-        print("loop")
-        last_index = find_index(text[last_index:], pattern)
-        print(last_index)
+    last_index = -1
+    for index in range(len(text)):
+        last_index = find_index(text, pattern, last_index)
+        print("last found match at:", last_index)
 
         if last_index is None:
             break
+        
+        if last_index >= len(text):
+            break
 
+        print("index generated!\n")
         yield last_index
-        last_index += 1
 
 
 def test_string_algorithms(text, pattern):
